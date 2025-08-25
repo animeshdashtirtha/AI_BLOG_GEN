@@ -1,0 +1,54 @@
+{% load static tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>allblogs</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% tailwind_css %}
+   
+</head>
+
+
+<body class="bg-[#151416] flex flex-col min-h-screen antialiased gap-6">
+      
+        <nav class="bg-[#003b42] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto">
+            
+            <div class="col-span-9 flex p-2 gap-3 my-auto hover:scale-[102%] duration-100">
+                <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
+                    AI Blog Generator
+                </h1>
+                <img src="{% static 'img/logo1.png' %}" class="h-12" alt="logo1">
+            </div>
+
+            <div class="col-span-3 flex justify-end p-2">
+                   <h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3>
+            </div>
+        </nav> 
+
+
+        <!-- All Blogs -->
+    <div class="p-8">
+        <div class="p-10 bg-[#003b42] rounded-lg">
+            <label>
+                <h1 class="text-[#ffff] text-2xl">All Articles List :</h1>
+            </label>
+            <br>
+            <div class="text-lg my-8 p-6 ring rounded-lg ring-[#96939322] hover:ring-3 hover:ring-[#00787c]">
+                <p class="text-[#ffff]">ipsa debitis nesciunt accusamus similique exercitationem asperiores perferendis quae dolores maiores sed distinctio quibusdam! Nihil, eius hic? Perspiciatis, voluptate.</p>
+            </div>
+            <div class="text-lg my-8 p-6 ring rounded-lg ring-[#96939322] hover:ring-3 hover:ring-[#00787c]">
+                <p class="text-[#ffff]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, aliquam, consequatur ipsa debitis nesciunt accusamus similique exercitationem asperiores perferendis quae dolores maiores sed distinctio quibusdam! Nihil, eius hic? Perspiciatis, voluptate.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<footer class="text-[#a8beae] text-center">
+    Powered by AnimeshTirtha
+</footer>
+
+</html>

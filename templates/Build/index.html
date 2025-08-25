@@ -1,0 +1,85 @@
+{% load static tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog Generator</title>
+    <!-- <link rel="stylesheet" href="{% static 'css\dist\output.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+   
+</head>
+<body class="bg-[#e0ecec] flex flex-col min-h-screen items-center antialiased">
+
+       <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+            
+            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
+                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
+                    AI Blog Generator
+                </h1> -->
+                <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo1">
+            </div>
+
+            <div class="col-span-3 flex justify-end gap-[2%] items-center">
+                
+                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636]">
+                    <span class="text-[#485a63] text-l md:text-md text-shadow-2xs">signed in as</span>
+                    <h3 class="text-[#00b1c5] text-l font-semibold md:text-xl text-shadow-2xs hover:underline duration-100">{{user.username}}</h3>
+                </div>
+                
+                <a href="logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+            </div>
+        </nav> 
+
+        <!-- main segemnt -->
+
+        <div class="m-10">
+            <div class="bg-[#171a19] rounded-xl p-8  max-w-[1200px] mx-auto border-3 border-[#00b1c5]">
+
+                    <!-- Introduction section -->
+                <div class=" font-semibold text-xl flex flex-col items-center ">
+                    <h2 class="text-2xl text-[#dfdfdf] mb-3 text-shadow-md">Welcome the the AI Blog Generator</h2>
+                    
+                    <h2 class="text-[#a1a1a1] text-shadow-md">Generate high-quality blog articles from YouTube videos using Artificial Intelligence. Simply enter the link to YouTube video below and let the AI create the content for you.</h2>
+                </div>
+
+                    <!-- Take Link Section -->
+                <div class="my-8 flex flex-col items-center">
+                   <h2 class="my-6 text-2xl text-[#00b1c5] text-shadow-md">Paste Your YouTube Link Here</h2> 
+                   <div class="space-x-2">
+                    <input id="youtube_link" type="url" placeholder="Paste YouTube Link" class="p-3 font-semibold bg-white border-2 rounded-l-xl h-10 w-40 md:w-96 shadow-md ring-1 ring-[#00b1c5]">
+                    <a href="index2.html">
+                        <button id="generate_button" class="text-shadow-md shadow-md bg-[#00b1c5] hover:bg-[#06c8dd] h-10 rounded-r-xl text-[#000] p-1 font-semibold ring-2 ring-inset ring-[#ffffff] active:ring-[#007ac0]">Generate</button> 
+                    </a>
+                   </div>
+                </div>
+
+                    <!-- Section for Loading Circle -->
+                <div style="display: none;" class="loader mx-auto my-16">                            </div>
+
+                   
+                
+                    <!-- Blog Showcase -->
+                <section class="mt-20 flex grow flex-col gap-4">
+                    <h2 class="text-xl text-white  font-['roboto'] font-semibold">Here is your generated Blog :</h2>
+                    <div id="blogcontent" class="text-[#bed1b3] font-['roboto']">
+                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora dolorum voluptas, porro voluptate molestiae veritatis illum tempore laborum sunt nobis sequi exercitationem explicabo debitis. Ipsam et veritatis quae cupiditate facilis.
+                    </div>
+                   
+                </section>
+
+            </div>
+        </div>
+</body>
+
+<script>
+    
+</script>
+
+<footer class="text-[#003b42] text-center">
+    Powered by AnimeshTirtha
+</footer>
+
+</html>
