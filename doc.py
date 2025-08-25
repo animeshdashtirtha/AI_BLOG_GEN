@@ -1,4 +1,5 @@
 x=1
-y=2
+y=3
 print(x)
 print(y)
+print(x-y)
