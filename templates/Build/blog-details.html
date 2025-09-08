@@ -1,0 +1,96 @@
+{% load static tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog details</title>
+    <!-- <link rel="stylesheet" href="{% static 'css\dist\output.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+   
+</head>
+<body class="bg-[#e0ecec] flex flex-col min-h-screen items-center antialiased bg-cover bg-center"
+style="background-image: url('{% static "img/bg1.jpg" %}');">
+
+       <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+            
+            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
+                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
+                    AI Blog Generator
+                </h1> -->
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo1">
+                </a>
+            </div>
+
+            <div class="col-span-3 flex justify-end gap-[2%] items-center">
+                
+                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636]">
+                    <span class="text-[#485a63] text-l md:text-md text-shadow-2xs">signed in as</span>
+                    <h3 class="text-[#00b1c5] text-l font-semibold md:text-xl text-shadow-2xs hover:underline duration-100">{{user.username}}</h3>
+                </div>
+                
+                <a href="logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+            </div>
+        </nav> 
+ 
+
+           
+        <!-- This is the main segment  -->
+        <div class="flex flex-col mt-10 bg-[#171a19] border-2 border-[#00b1c5] p-10 gap-2 rounded-none sm:rounded-xl text-shadow-lg sm:w-[90%] sm:max-w-6xl w-full mx-auto">
+            <div>
+                <h2 class="mt-7 mb-4 text-center text-2xl text-[#ffff] underline">Blog Article Details</h2>
+                <div class="float-end flex flex-col">
+                    <div class="sm:text-xs text-[10px] ml-4 text-[#ffff] text-end">Date generated :</div>
+                    <div class="sm:text-xs text-[12px] ml-4 text-[#ffff]">{{blog_detail.created_at}}</div>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                    <div class="text-2xl ml-4 text-[#ffff]">YouTube Link :</div>
+                    <a href="{{blog_detail.y_link}}" target="_blank" rel="noopener noreferrer">
+                        <p class="text-md underline font-semibold ml-4 text-[#0d00c2] hover:text-[#0026ff] max-w-auto break-words">{{blog_detail.y_link}}</p>
+                    </a>
+                    
+            </div>
+
+            <div class="mt-4">
+                    <h2 class="text-2xl ml-4 text-[#ffff]">Generated Article :</h2>
+            </div>
+
+            <section class="flex-grow">
+                
+                <div class="border border-[#00b1c5] rounded-lg p-6 break-words">
+                    <h2 id="youtubetitle" class="text-2xl font-semibold mb-1 text-[#fff]">{{blog_detail.y_title}}</h2>
+                    <hr class="border-[#00b1c5]">
+                    <h3 id="blogpostdetail" class="prose-sm text-md text-[#ffff] mt-6 px-4"></h3>
+                </div>
+                
+
+            </section>
+                
+
+
+
+            
+        </div>
+        
+
+
+        <script>
+            const rawContent = `{{ blog_detail.gen_content|escapejs }}`;
+            document.getElementById("blogpostdetail").innerHTML = marked.parse(rawContent);
+
+        </script>
+
+
+</body>
+
+<footer class="text-[#000000] text-center">
+    Powered by AnimeshTirtha
+</footer>
+
+</html>

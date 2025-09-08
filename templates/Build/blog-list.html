@@ -1,0 +1,73 @@
+{% load static tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>all blogs</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% tailwind_css %}
+    
+</head>
+
+
+<body class="bg-[#e0ecec] flex flex-col min-h-screen items-center antialiased bg-cover bg-center"
+style="background-image: url('{% static "img/bg1.jpg" %}');">
+
+       <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+            
+            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
+                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
+                    AI Blog Generator
+                </h1> -->
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo2">
+                </a>
+            </div>
+
+            <div class="col-span-3 flex justify-end gap-[2%] items-center">
+                
+                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636]">
+                    <span class="text-[#485a63] text-l md:text-md text-shadow-2xs">signed in as</span>
+                    <h3 class="text-[#00b1c5] text-l font-semibold md:text-xl text-shadow-2xs hover:underline duration-100">{{user.username}}</h3>
+                </div>
+                
+                <a href="logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+            </div>
+        </nav> 
+
+
+        <!-- All Blogs -->
+    
+        <div class="flex flex-col mt-10 bg-[#171a19] border-2 border-[#00b1c5] p-10 gap-2 rounded-none sm:rounded-xl text-shadow-lg sm:w-[80%] sm:max-w-6xl w-full mx-auto">
+            <label>
+                <h1 class="text-[#ffff] text-2xl">All Articles List :</h1>
+            </label>
+            <hr class="my-0 w-full border-[1px] border-[#00b1c5] mb-4">
+
+            {% if blog_articles %}
+                {% for article in blog_articles%}
+                <a href="blog-details/{{article.id}}">
+                    <div class="text-lg my-4 mx-6 ring rounded-b-lg ring-[#415f63] hover:ring-2 hover:ring-[#00b1c5]">
+                        <section class="py-5 px-10 hover:scale-[102%] duration-100">
+                            <p class="text-[#dbdbdb] font-semibold underline underline-offset-2">{{article.y_title}} : </p>
+                            <p class="text-[#bdbdbd] text-md prose-sm">{{article.gen_content|truncatechars:200}}</p>
+                        </section>
+                    </div>
+                </a>    
+
+                {% endfor %}
+            {% else %}
+                <h2 class="flex text-[#ffff] justify-center items-center h-64 text-lg ring-1 ring-[#00b1c5] rounded-b-xl">No articles generated yet.</h2>
+            {% endif %}
+
+        </div>
+
+</body>
+
+<footer class="text-[#171a19] text-center pt-4">
+    Powered by AnimeshTirtha
+</footer>
+
+</html>

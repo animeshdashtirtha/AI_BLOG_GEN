@@ -1,0 +1,84 @@
+{% load static tailwind_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% tailwind_css %}
+   
+</head>
+<body class="bg-[#e0ecec] w-full flex flex-col min-h-screen antialiased shadow-lg bg-cover bg-center"
+style="background-image: url('{% static "img/bg1.jpg" %}');">
+        
+    <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+            
+            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
+                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
+                    AI Blog Generator
+                </h1> -->
+                <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo1">
+            </div>
+
+             <div class="col-span-3 flex justify-end gap-3 p-2">
+                 <a href="login"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> login</h3></a>  
+                 <!-- <a href="signup"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> signup</h3></a>   -->
+            </div>
+
+        </nav>  
+
+        
+        <!-- Sign Up Segment -->
+<form action="" method="POST" class="flex flex-col mt-20 mb-12 bg-[#171a19] border-2 border-[#00b1c5] sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%]">
+        {%csrf_token%}    
+        <div class="text-center">
+            <h2 class="text-[#00b1c5] text-2xl font-semibold underline">Create new account</h2>
+            <h3 class="text-[#b9b9b9] text-lg ">It's quick and easy</h3>
+        </div>
+        
+        <hr class="my-0 w-full border-[1px] border-[#00b1c5]">
+
+        {%if error_signup %}
+        <div class="mx-auto text-[#33ff00] text-shadow-2xs">
+            <p class="text-2xl ">{{error_signup}}</p>
+        </div>
+        {% endif %}
+
+        <div class="flex flex-col gap-2">
+            
+            <label for="username" class=" text-[#fff] text-l">
+            Username
+            </label>
+            <input type="text" id="username" name="username" placeholder="Enter Username...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
+            
+            <label for="email" class=" text-[#fff] text-l">
+            Email
+            </label>
+            <input type="email" id="email" name="email" placeholder="Enter Email...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
+            
+            <label for="password" class=" text-[#fff] text-l">
+            Password
+            </label>
+            <input type="password" id="password" name="password" placeholder="Password...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
+            
+            <label for="repeatpassword" class=" text-[#fff] text-l">
+            Re-enter Password
+            </label>
+            <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Password...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
+
+        </div>
+                
+        <button class="bg-[#cc8500] p-1 font-bold text-[#fff] rounded mt-4 mx-auto w-48 ring-[#00b1c5] hover:ring-1 hover:scale-110 hover:bg-[#e49400] shadow-lg">Create account</button>
+        
+</form>
+
+
+</body>
+
+<footer class="text-[#a8beae] text-center">
+    Powered by AnimeshTirtha
+</footer>
+
+</html>
