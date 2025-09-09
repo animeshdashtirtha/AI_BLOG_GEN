@@ -198,8 +198,8 @@ def blog_list(request):
    return render(request, 'Build/blog-list.html', {'blog_articles': blog_articles})
    
 
-def blog_details(request, pk):
-   blog_detail = BlogPost.objects.get(id=pk)
+def blog_details(request, i):
+   blog_detail = BlogPost.objects.get(id=i)
    if request.user == blog_detail.user:
       return render(request, 'Build/blog-details.html', {'blog_detail': blog_detail})
    else:
