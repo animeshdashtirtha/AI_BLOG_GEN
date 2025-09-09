@@ -28,12 +28,12 @@ style="background-image: url('{% static "img/bg1.jpg" %}');">
 
             <div class="col-span-3 flex justify-end gap-[2%] items-center">
                 
-                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636]">
+                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636] items-center">
                     <span class="text-[#485a63] text-l md:text-md text-shadow-2xs">signed in as</span>
                     <h3 class="text-[#00b1c5] text-l font-semibold md:text-xl text-shadow-2xs hover:underline duration-100">{{user.username}}</h3>
                 </div>
                 
-                <a href="logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+                <a href="/logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
             </div>
         </nav> 
 
