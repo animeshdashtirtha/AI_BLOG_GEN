@@ -13,7 +13,6 @@ import json
 import time
 import yt_dlp
 from django.conf import settings
-import whisper
 from openai import OpenAI
 from .models import BlogPost
 from django.utils import timezone
@@ -144,6 +143,7 @@ def download_audio(link):
 
 
 def get_transcript(audio_path):
+   import whisper
    try:
       # Load the Whisper model (choose: tiny, base, small, medium, large)
       model = whisper.load_model("base")
