@@ -1,7 +1,8 @@
-
+import sys
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from decouple import config 
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
@@ -15,11 +16,17 @@ import yt_dlp
 from django.conf import settings
 from openai import OpenAI
 from .models import BlogPost
-from django.utils import timezone
+from myproject.settings import BASE_DIR
+
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, PROJECT_ROOT)
+COOKIES_FILE = os.path.join(BASE_DIR, "static", "cookies", "cookies.txt")
+
 
 
 # openaitoken
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_KEY = config('OPENAI_API_KEY')
 
 @login_required
 def index (request): 
@@ -114,7 +121,9 @@ def generate_blog (request):
 
 def yt_title(link):
    try:
-      ydl_opts = {}
+      ydl_opts = {
+         'cookies': config('YOUTUBE_COOKIES_FILE'),
+      }
       with yt_dlp.YoutubeDL(ydl_opts) as ydl:
          info = ydl.extract_info(link, download=False)
          return info.get('title')
@@ -127,6 +136,7 @@ def download_audio(link):
       ydl_opts = {
          'format': 'bestaudio/best',
          'outtmpl': os.path.join(settings.MEDIA_ROOT, 'audio.%(ext)s'),
+         'cookies': config('YOUTUBE_COOKIES_FILE'),
          'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',

@@ -13,17 +13,14 @@
 <body class="bg-[#e0ecec] w-full flex flex-col min-h-screen antialiased shadow-lg bg-cover bg-center"
 style="background-image: url('{% static "img/bg1.jpg" %}');">
         
-    <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+    <nav class="bg-[#171a19] grid grid-cols-12 sm:px-6 sm:py-4 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
             
             <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
-                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
-                    AI Blog Generator
-                </h1> -->
-                <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo1">
+                <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
             </div>
 
-             <div class="col-span-3 flex justify-end gap-3 p-2">
-                 <a href="login"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> login</h3></a>  
+             <div class="col-span-3 flex items-center justify-end gap-3 p-2">
+                 <a href="/login"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> login</h3></a>  
                  <!-- <a href="signup"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> signup</h3></a>   -->
             </div>
 

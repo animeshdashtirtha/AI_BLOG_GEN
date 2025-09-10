@@ -15,25 +15,21 @@
 <body class="bg-[#e0ecec] flex flex-col min-h-screen items-center antialiased bg-cover bg-center"
 style="background-image: url('{% static "img/bg1.jpg" %}');">
 
-       <nav class="bg-[#171a19] grid grid-cols-12 sm:p-6 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
+       <nav class="bg-[#171a19] grid grid-cols-12 sm:px-6 sm:py-4 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
             
             <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
-                <!-- <h1 class="text-white text-4xl md:text-5xl font-semibold font-['serif'] text-shadow-md hover:text-gray-200 duration-100 "> 
-                    AI Blog Generator
-                </h1> -->
-                <a href="{% url 'index' %}">
-                    <img src="{% static 'img/logo2.png' %}" class="h-20" alt="logo2">
-                </a>
+                <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
             </div>
 
             <div class="col-span-3 flex justify-end gap-[2%] items-center">
                 
-                <div class="flex flex-col border-r-2 pr-[3%] border-[#363636] items-center">
-                    <span class="text-[#485a63] text-l md:text-md text-shadow-2xs">signed in as</span>
-                    <h3 class="text-[#00b1c5] text-l font-semibold md:text-xl text-shadow-2xs hover:underline duration-100">{{user.username}}</h3>
+                <div class="group flex flex-col px-[2%] py-[1%] sm:border-2 border-[#363636] rounded-xl rounded-r-none items-center">
+                    <span class="text-[#485a63] sm:text-[15px] text-[12px] text-shadow-2xs text-center">signed in as</span>
+                    <a href="blog-list">
+                        <h3 class="text-[#00b1c5] text-sm sm:text-l md:text-xl font-semibold  text-shadow-2xs group-hover:scale-105 group-hover:underline duration-100">{{user.username}}</h3>
+                    </a>
                 </div>
-                
-                <a href="/logout"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+                <a href="/logout"><h3 class="border-l-2 border-[#363636] pl-[5%] text-white text-l md:text-xl sm:text-l text-sm text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
             </div>
         </nav> 
 
