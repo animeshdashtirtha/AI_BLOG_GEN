@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns=[
     path('',views.index, name='index'),  
@@ -10,3 +12,4 @@ urlpatterns=[
     path('blog-list',views.blog_list, name='blog-list')  ,
     path('blog-details/<int:i>/',views.blog_details, name='blog-details')  ,
       ]
+

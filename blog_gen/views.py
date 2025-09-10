@@ -1,5 +1,6 @@
 import sys
 import os
+import django
 from dotenv import load_dotenv
 load_dotenv()
 from decouple import config 
@@ -19,11 +20,15 @@ from .models import BlogPost
 from myproject.settings import BASE_DIR
 
 
+# Add project root to Python path (optional, but safe)
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+# Initialize Django
+django.setup()
+# Import BASE_DIR and build path ---
+from myproject.settings import BASE_DIR
 COOKIES_FILE = os.path.join(BASE_DIR, "static", "cookies", "cookies.txt")
-
-
 
 # openaitoken
 OPENAI_API_KEY = config('OPENAI_API_KEY')
@@ -122,7 +127,7 @@ def generate_blog (request):
 def yt_title(link):
    try:
       ydl_opts = {
-         'cookies': config('YOUTUBE_COOKIES_FILE'),
+         'cookies': 'COOKIES_FILE',
       }
       with yt_dlp.YoutubeDL(ydl_opts) as ydl:
          info = ydl.extract_info(link, download=False)
@@ -136,7 +141,7 @@ def download_audio(link):
       ydl_opts = {
          'format': 'bestaudio/best',
          'outtmpl': os.path.join(settings.MEDIA_ROOT, 'audio.%(ext)s'),
-         'cookies': config('YOUTUBE_COOKIES_FILE'),
+         'cookies': 'COOKIES_FILE',
          'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
@@ -214,3 +219,4 @@ def blog_details(request, i):
       return render(request, 'Build/blog-details.html', {'blog_detail': blog_detail})
    else:
       return redirect('/')
+   
