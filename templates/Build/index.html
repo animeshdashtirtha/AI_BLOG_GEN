@@ -20,17 +20,18 @@ style="background-image: url('{% static "img/bg1.jpg" %}');">
        <nav class="bg-[#171a19] grid grid-cols-12 sm:px-6 sm:py-4 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
             
             <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
-                <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
+                <a href="/" aria-label="Go to home page">
+                    <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
+                </a>
             </div>
 
-            <div class="col-span-3 flex justify-end gap-[2%] items-center">
+            <div class="col-span-3 flex justify-end gap-[3%] items-center">
                 
-                <div class="group flex flex-col px-[2%] py-[1%] sm:border-2 border-[#363636] rounded-xl rounded-r-none items-center">
+                <div class="group flex flex-col px-[2%] py-[1%] sm:border-2 border-[#363636] rounded-xl items-center">
                     <span class="text-[#485a63] sm:text-[15px] text-[12px] text-shadow-2xs text-center">signed in as</span>
-                    <a href="blog-list">
-                        <h3 class="text-[#00b1c5] text-sm sm:text-l md:text-xl font-semibold  text-shadow-2xs group-hover:scale-105 group-hover:underline duration-100">{{user.username}}</h3>
-                    </a>
+                    <h3 class="text-[#00b1c5] text-sm sm:text-l md:text-xl font-semibold text-shadow-2xs">{{user.username}}</h3>
                 </div>
+                <a href="/blog-list"><h3 class="text-gray-300 text-l md:text-xl sm:text-l text-sm text-shadow-2xs hover:scale-110 hover:underline duration-100">Browse Blogs</h3></a>
                 <a href="/logout"><h3 class="border-l-2 border-[#363636] pl-[5%] text-white text-l md:text-xl sm:text-l text-sm text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
             </div>
         </nav> 
@@ -139,7 +140,7 @@ document.getElementById('generate_button').addEventListener('click', async () =>
 
 </script>
 
-<footer class="text-[#003b42] text-center">
+<footer class="text-[#5b6163] text-center">
     Powered by AnimeshTirtha
 </footer>
 
