@@ -11,3 +11,19 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.y_title
+
+
+class DailyGenerationCount(models.Model):
+    """
+    Tracks per-user daily blog generation count for quota enforcement.
+    One row per (user, date) — auto-resets at midnight UTC.
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = [['user', 'date']]
+
+    def __str__(self):
+        return f"{self.user.username} — {self.date}: {self.count}"

@@ -1,147 +1,273 @@
-{% load static tailwind_tags%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Blog Generator</title>
-    <!-- <link rel="stylesheet" href="{% static 'css\dist\output.css' %}"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% tailwind_css %}
-   
-</head>
-<body class="flex flex-col min-h-screen items-center antialiased bg-cover bg-center"
-style="background-image: url('{% static "img/bg1.jpg" %}');">
+{% extends "base.html" %}
+{% load static %}
 
-        <!-- Navigation Bar -->
+{% block title %}AI Blog Generator — Home{% endblock %}
 
-       <nav class="bg-[#171a19] grid grid-cols-12 sm:px-6 sm:py-4 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
-            
-            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
-                <a href="/" aria-label="Go to home page">
-                    <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
-                </a>
+{% block meta_description %}Generate high-quality blog articles from YouTube videos using AI. Simply paste a YouTube link and let artificial intelligence create professional content for you.{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <div class="card p-7 sm:p-10 t-border-accent" style="border-width: 2px;">
+
+        {# ---- Hero / Introduction ---- #}
+        <section class="hero-section">
+            {# -- Floating decorative shapes -- #}
+            <div class="hero-shape hero-shape--1" aria-hidden="true"></div>
+            <div class="hero-shape hero-shape--2" aria-hidden="true"></div>
+            <div class="hero-shape hero-shape--3" aria-hidden="true"></div>
+            <div class="hero-shape hero-shape--4" aria-hidden="true"></div>
+
+            <h1 class="hero-title text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight t-text-primary lg:p-4 sm:pb-4 pb-2">
+                AI Blog Generator
+            </h1>
+            <p class="hero-subtext text-base sm:text-lg max-w-2xl mx-auto leading-relaxed t-text-secondary">
+                Transform YouTube videos into professional, high-quality blog articles using artificial intelligence.
+                Paste a link below and let us do the writing.
+            </p>
+            <div class="hero-badge inline-flex items-center gap-2 badge">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Powered by OpenRouter AI
             </div>
+        </section>
 
-            <div class="col-span-3 flex justify-end gap-[3%] items-center">
-                
-                <div class="group flex flex-col px-[2%] py-[1%] sm:border-2 border-[#363636] rounded-xl items-center">
-                    <span class="text-[#485a63] sm:text-[15px] text-[12px] text-shadow-2xs text-center">signed in as</span>
-                    <h3 class="text-[#00b1c5] text-sm sm:text-l md:text-xl font-semibold text-shadow-2xs">{{user.username}}</h3>
-                </div>
-                <a href="/blog-list"><h3 class="text-gray-300 text-l md:text-xl sm:text-l text-sm text-shadow-2xs hover:scale-110 hover:underline duration-100">Browse Blogs</h3></a>
-                <a href="/logout"><h3 class="border-l-2 border-[#363636] pl-[5%] text-white text-l md:text-xl sm:text-l text-sm text-shadow-2xs hover:scale-110 hover:underline duration-100"> logout</h3></a>     
+        {# ---- Important Notes / Tips ---- #}
+        <aside class="info-note" aria-label="Important notes before you begin" data-animate>
+            <svg class="info-note__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <div class="info-note__content">
+                <p class="info-note__title">Before you begin&hellip;</p>
+                <ul class="info-note__list">
+                    <li>Not all videos are suitable for blog generation — videos with poor audio, heavy background noise, or non-English speech may produce low-quality results.</li>
+                    <li>Shorter videos and videos with accurate captions or subtitles generate blogs faster. For the best experience, we recommend uploading such content whenever possible.</li>
+                    <li>This is a demo project, so a daily generation limit is in place to ensure fair usage and security for everyone.</li>
+                </ul>
             </div>
-        </nav> 
+        </aside>
 
-        <!-- main segemnt -->
-
-        <div class="m-10">
-            <div class="bg-[#171a19] rounded-xl p-8  max-w-[1200px] mx-auto border-3 border-[#00b1c5]">
-
-                    <!-- Introduction section -->
-                <div class=" font-semibold text-xl flex flex-col items-center ">
-                    <h2 class="text-2xl text-[#dfdfdf] mb-3 text-shadow-md">Welcome the the AI Blog Generator</h2>
-                    
-                    <h2 class="text-[#a1a1a1] text-shadow-md">Generate high-quality blog articles from YouTube videos using Artificial Intelligence. Simply enter the link to YouTube video below and let the AI create the content for you.</h2>
-                </div>
-
-                    <!-- Take Link Section -->
-                <div class="my-8 flex flex-col items-center">
-                   <h2 class="my-6 text-2xl text-[#00b1c5] text-shadow-md">Paste Your YouTube Link Here</h2> 
-                   <div class="space-x-2">
-                        <input id="youtube_link" type="url" placeholder="Paste YouTube Link" class="p-3 font-semibold bg-white border-2 rounded-l-xl h-10 w-40 md:w-96 shadow-md ring-1 ring-[#00b1c5]">
-                        <button type="button" id="generate_button" class="text-shadow-md shadow-md bg-[#00b1c5] hover:bg-[#06c8dd] h-10 rounded-r-xl text-[#000] p-1 font-semibold ring-2 ring-inset ring-[#ffffff] active:ring-[#007ac0]">Generate</button> 
-                    </div>
-                </div>
-
-                    <!-- Section for Loading Circle -->
-                <section style="display: none;" id="loading_circle">
-                    <div  class="loader mx-auto my-16">    
-                    </div>
-                    <p class="text-center text-[#4d5f61] font-semibold text-md">
-                        Generating your blog, please wait a few seconds ...
-                    </p>
-                </section>
-                                   
-                
-                    <!-- Blog Showcase -->
-                
-                <section id="blog_display" class="hidden">
-                    <section class="mt-20 flex grow flex-col gap-7">
-                    <h2 class="text-xl text-white  font-['roboto'] font-semibold">Here is your generated Blog :</h2>
-                    
-                    <section class="bg-[#212524] border-[#2f423d] text-[#d2ddcc] p-6 rounded-2xl border-2 shadow-lg flex flex-col gap-3">
-                        <p id="title" class="font-['roboto'] text-xl underline">
-                            Something Went Wrong, Cant process.
-                        </p>
-                        
-                        <p id="blogcontent" class="prose-sm font-['roboto']">
-                        Something Went Wrong, Cant process.
-                        </p>
-                    </section>
-                    
-                   
-                    </section>
-                </section>
-                    
-
+        {# ---- YouTube Link Input ---- #}
+        <div class="input-section" data-animate>
+            <label for="youtube_link" class="input-label block text-center text-lg sm:text-xl font-semibold">
+                Paste Your YouTube Link
+            </label>
+            <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                <input
+                    id="youtube_link"
+                    type="url"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                    class="input-field flex-1 text-sm sm:text-base"
+                    aria-label="YouTube video URL">
+<button
+                     type="button"
+                     id="generate_button"
+                     class="btn btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 flex-shrink-0">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                    </svg>
+                    Generate Blog
+                </button>
             </div>
         </div>
-</body>
 
+        {# ---- Loading State ---- #}
+        <section id="loading_circle" style="display: none;" class="text-center py-12" role="status" aria-live="polite">
+            <div class="spinner mx-auto mb-6"></div>
+            <p class="text-sm font-medium t-text-muted">
+                Generating your blog, please wait a few seconds&hellip;
+            </p>
+        </section>
+
+        {# ---- Blog Output ---- #}
+        <section id="blog_display" class="hidden animate-fade-in-scale">
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h2 class="text-xl sm:text-2xl font-bold t-text-primary">
+                        Here is your generated blog:
+                    </h2>
+                    <button id="save_blog_btn" class="btn btn-primary text-sm flex items-center gap-1.5 opacity-0 pointer-events-none transition-opacity duration-200" disabled>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+                        </svg>
+                        Save Blog
+                    </button>
+                </div>
+
+                <div class="card p-7 sm:p-9 t-bg-tertiary border-none">
+                    <h3 id="title" class="text-xl sm:text-2xl font-bold mb-4 underline underline-offset-4 t-text-primary">
+                        Something went wrong. Cannot process.
+                    </h3>
+                    <div id="blogcontent" class="prose-custom">
+                        Something went wrong. Cannot process.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
 <script>
-    
-document.getElementById('generate_button').addEventListener('click', async () => {
-    const youtubeLink = document.getElementById('youtube_link').value;
-    const loadingCircle = document.getElementById('loading_circle');
-    const blogContent = document.getElementById('blogcontent');
-    const blogtitle = document.getElementById('title');
-    const blogDisplay = document.getElementById('blog_display');
+    // Track current blog data for explicit save
+    let currentBlogData = { title: '', link: '', content: '' };
 
-    if (youtubeLink) {
+    function getCookie(name) {
+        let value = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    value = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return value;
+    }
+
+    const csrfToken = getCookie('csrftoken');
+    const saveBtn = document.getElementById('save_blog_btn');
+
+    function showSaveButton() {
+        saveBtn.classList.remove('opacity-0', 'pointer-events-none');
+        saveBtn.disabled = false;
+        // Reset to default state if previously saved
+        saveBtn.classList.remove('btn-secondary');
+        saveBtn.classList.add('btn-primary');
+        saveBtn.innerHTML = `
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+            </svg>
+            Save Blog
+        `;
+    }
+
+    function hideSaveButton() {
+        saveBtn.classList.add('opacity-0', 'pointer-events-none');
+        saveBtn.disabled = true;
+    }
+
+    saveBtn.addEventListener('click', async () => {
+        if (!currentBlogData.title || !currentBlogData.link || !currentBlogData.content) {
+            return;
+        }
+
+        const originalHTML = saveBtn.innerHTML;
+        const wasPrimary = saveBtn.classList.contains('btn-primary');
+        saveBtn.innerHTML = `
+            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            Saving...
+        `;
+        saveBtn.disabled = true;
+
+        try {
+            const response = await fetch('/save-blog', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(currentBlogData)
+            });
+
+            const data = await response.json();
+            if (data.error) {
+                alert('Failed to save: ' + data.error);
+            } else {
+                saveBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                    </svg>
+                    Saved!
+                `;
+                saveBtn.classList.remove('btn-primary');
+                saveBtn.classList.add('btn-secondary');
+                setTimeout(() => {
+                    saveBtn.innerHTML = `
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+                        </svg>
+                        Saved
+                    `;
+                    saveBtn.disabled = true;
+                }, 2000);
+                return;
+            }
+        } catch (error) {
+            console.error("Save error:", error);
+            alert('Something went wrong while saving.');
+        }
+
+        saveBtn.innerHTML = originalHTML;
+        saveBtn.disabled = false;
+        if (!wasPrimary) {
+            saveBtn.classList.add('btn-primary');
+            saveBtn.classList.remove('btn-secondary');
+        }
+    });
+
+    document.getElementById('generate_button').addEventListener('click', async () => {
+        const youtubeLink = document.getElementById('youtube_link').value;
+        const loadingCircle = document.getElementById('loading_circle');
+        const blogContent = document.getElementById('blogcontent');
+        const blogtitle = document.getElementById('title');
+        const blogDisplay = document.getElementById('blog_display');
+
+        if (!youtubeLink) {
+            alert("Please enter a valid YouTube link.");
+            return;
+        }
+
+        hideSaveButton();
+        currentBlogData = { title: '', link: '', content: '' };
+
         loadingCircle.style.display = 'block';
         blogDisplay.classList.add('hidden');
         blogtitle.textContent = '';
         blogContent.textContent = '';
 
-        const endpointUrl = '/generate-blog';
         try {
-            const response = await fetch(endpointUrl, {
+            const response = await fetch('/generate-blog', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify({ link: youtubeLink })
             });
 
             const data = await response.json();
             if (data.error) {
-                blogContent.textContent = data.error;
+                blogContent.innerHTML = '<p>' + data.error + '</p>';
                 blogtitle.textContent = "Error";
             } else {
                 blogContent.innerHTML = marked.parse(data.content || "");
-                blogtitle.textContent = data.title || "";
+                blogtitle.textContent = data.title || "Untitled";
+                // Store blog data for explicit save
+                currentBlogData = {
+                    title: data.title || 'Untitled',
+                    link: data.link || youtubeLink,
+                    content: data.content || ''
+                };
+                showSaveButton();
             }
             blogDisplay.classList.remove('hidden');
             loadingCircle.style.display = 'none';
         } catch (error) {
             console.error("Error Occurred:", error);
-            alert("Something went wrong. Please try again later.");
+            blogContent.textContent = "Something went wrong. Please try again later.";
+            blogtitle.textContent = "Error";
             loadingCircle.style.display = 'none';
             blogDisplay.classList.remove('hidden');
         }
-    } else {
-        alert("Please enter a Proper Youtube Link.");
-    }
-});
-
+    });
 </script>
-
-<footer class="text-[#5b6163] text-center">
-    Powered by AnimeshTirtha
-</footer>
-
-</html>
+{% endblock %}

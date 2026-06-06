@@ -1,83 +1,111 @@
-{% load static tailwind_tags%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signup</title>
-    <!-- <link rel="stylesheet" href="{% static 'css/output.css' %}"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    {% tailwind_css %}
-   
-</head>
-<body class="bg-[#e0ecec] w-full flex flex-col min-h-screen antialiased shadow-lg bg-cover bg-center"
-style="background-image: url('{% static "img/bg1.jpg" %}');">
-        
-    <nav class="bg-[#171a19] grid grid-cols-12 sm:px-6 sm:py-4 p-2 w-full mx-auto border-b-2 border-[#00b1c5]">
-            
-            <div class="col-span-9 flex gap-3 my-auto hover:scale-[101%] ">
-                <a href="/" aria-label="Go to home page">
-                    <img src="{% static 'img/logo2.png' %}" class="sm:h-20 h-15" alt="logo1">
-                </a>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign Up — AI Blog Generator{% endblock %}
+
+{% block meta_description %}Create your free account on AI Blog Generator and start transforming YouTube videos into professional, AI-generated blog articles instantly.{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto px-4 sm:px-6 py-10 sm:py-20">
+    <div class="bg-blur t-bg-nav border t-border-accent rounded-2xl shadow-md p-8 sm:p-10" style="border-width: 2px;">
+
+        {% if user.is_authenticated %}
+        {# ---- Already authenticated — show redirect options ---- #}
+        <div class="text-center space-y-6">
+            <div class="flex items-center justify-center w-16 h-16 mx-auto rounded-full t-bg-tertiary">
+                <svg class="w-8 h-8" style="color: var(--color-success);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
             </div>
-
-             <div class="col-span-3 flex items-center justify-end gap-3 p-2">
-                 <a href="/login"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> login</h3></a>  
-                 <!-- <a href="signup"><h3 class="text-white text-l md:text-xl text-shadow-2xs hover:scale-110 hover:underline duration-100"> signup</h3></a>   -->
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold mb-3 t-text-primary">Account Already Created</h1>
+                <p class="text-sm t-text-muted">
+                    You are logged in as <strong class="t-text-accent">{{ user.username }}</strong>. No need to create another account — start generating blog content right away.
+                </p>
             </div>
-
-        </nav>  
-
-        
-        <!-- Sign Up Segment -->
-<form action="" method="POST" class="flex flex-col mt-20 mb-12 bg-[#171a19] border-2 border-[#00b1c5] sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%]">
-        {%csrf_token%}    
-        <div class="text-center">
-            <h2 class="text-[#00b1c5] text-2xl font-semibold underline">Create new account</h2>
-            <h3 class="text-[#b9b9b9] text-lg ">It's quick and easy</h3>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+                <a href="/" class="btn btn-primary py-3 px-8 text-base">Go to Dashboard</a>
+                <a href="/logout" class="btn btn-secondary py-3 px-8 text-base">Logout</a>
+            </div>
         </div>
-        
-        <hr class="my-0 w-full border-[1px] border-[#00b1c5]">
 
-        {%if error_signup %}
-        <div class="mx-auto text-[#33ff00] text-shadow-2xs">
-            <p class="text-2xl ">{{error_signup}}</p>
+        {% else %}
+        {# ---- Unauthenticated — show signup form ---- #}
+        <div class="text-center mb-10">
+            <h1 class="text-2xl sm:text-3xl font-extrabold mb-3 t-text-accent">Create Account</h1>
+            <p class="text-sm t-text-muted">It's quick and easy — start generating AI blog content in seconds</p>
+        </div>
+
+        <hr class="divider divider-accent mb-8">
+
+        {% if error_signup %}
+        <div class="toast toast-error mb-6 text-center" role="alert">{{ error_signup }}</div>
+        {% endif %}
+
+        <form action="" method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            <div class="space-y-1.5">
+                <label for="username" class="text-sm font-semibold t-text-primary">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    required
+                    class="input-field"
+                    autocomplete="username">
+            </div>
+
+            <div class="space-y-1.5">
+                <label for="email" class="text-sm font-semibold t-text-primary">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                    class="input-field"
+                    autocomplete="email">
+            </div>
+
+            <div class="space-y-1.5">
+                <label for="password" class="text-sm font-semibold t-text-primary">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a strong password"
+                    required
+                    class="input-field"
+                    autocomplete="new-password"
+                    minlength="8">
+            </div>
+
+            <div class="space-y-1.5">
+                <label for="repeatpassword" class="text-sm font-semibold t-text-primary">Confirm Password</label>
+                <input
+                    type="password"
+                    id="repeatpassword"
+                    name="repeatpassword"
+                    placeholder="Re-enter your password"
+                    required
+                    class="input-field"
+                    autocomplete="new-password"
+                    minlength="8">
+            </div>
+
+            <button type="submit" class="btn btn-warning w-full py-3 text-base mt-2">Create Account</button>
+        </form>
+
+        <hr class="divider my-8">
+
+        <div class="text-center">
+            <p class="text-sm t-text-muted mb-3">Already have an account?</p>
+            <a href="/login" class="btn btn-secondary w-full py-3 text-base">Sign In Instead</a>
         </div>
         {% endif %}
 
-        <div class="flex flex-col gap-2">
-            
-            <label for="username" class=" text-[#fff] text-l">
-            Username
-            </label>
-            <input type="text" id="username" name="username" placeholder="Enter Username...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
-            
-            <label for="email" class=" text-[#fff] text-l">
-            Email
-            </label>
-            <input type="email" id="email" name="email" placeholder="Enter Email...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
-            
-            <label for="password" class=" text-[#fff] text-l">
-            Password
-            </label>
-            <input type="password" id="password" name="password" placeholder="Password...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
-            
-            <label for="repeatpassword" class=" text-[#fff] text-l">
-            Re-enter Password
-            </label>
-            <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Password...." class="bg-[#fff] p-2 ring-1 ring-[#00b1c5] rounded-xl shadow-lg">
-
-        </div>
-                
-        <button class="bg-[#cc8500] p-1 font-bold text-[#fff] rounded mt-4 mx-auto w-48 ring-[#00b1c5] hover:ring-1 hover:scale-110 hover:bg-[#e49400] shadow-lg">Create account</button>
-        
-</form>
-
-
-</body>
-
-<footer class="text-[#a8beae] text-center">
-    Powered by AnimeshTirtha
-</footer>
-
-</html>
+    </div>
+</div>
+{% endblock %}

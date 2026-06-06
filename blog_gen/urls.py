@@ -9,7 +9,9 @@ urlpatterns=[
     path('signup',views.user_signup, name='signup')  , 
     path('logout',views.user_logout, name='logout')  ,
     path('generate-blog',views.generate_blog, name='generate-blog')  ,
+    path('save-blog',views.save_blog, name='save-blog')  ,
     path('blog-list',views.blog_list, name='blog-list')  ,
     path('blog-details/<int:i>/',views.blog_details, name='blog-details')  ,
+    path('delete-blog/<int:i>/',views.delete_blog, name='delete-blog'),
       ]
 

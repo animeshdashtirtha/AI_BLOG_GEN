@@ -26,6 +26,10 @@ staticfiles/
 # Node
 node_modules/
 
-# macOS
 .DS_Store
 .env
+apierrorcheck.py
+
+.kilo
+
+agents.md

@@ -1,0 +1,64 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{% block meta_description %}AI-powered blog generation tool that transforms YouTube videos into professional, high-quality blog articles using artificial intelligence.{% endblock %}">
+
+    <title>{% block title %}AI Blog Generator{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}">
+
+    <!-- Fonts: Inter (body) + JetBrains Mono (code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Marked.js for blog rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    {% tailwind_css %}
+
+    <!-- Prevent flash of white content: dark mode is default -->
+    <script>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            if (stored === 'light') {
+                document.documentElement.classList.remove('dark');
+            }
+            // Keep dark mode for 'dark' or null (default)
+        })();
+    </script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+    <body class="flex flex-col min-h-screen antialiased t-bg-primary transition-theme"
+          style="background-image: url('{% static "img/bgdark.png" %}'); background-size: cover; background-position: center; background-attachment: fixed;">
+
+    <!-- Dark mode background override -->
+    <style>
+        html:not(.dark) body {
+            background-image: url('{% static "img/bglight.png" %}') !important;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <!-- Skip to main content (accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    {% include "Build/includes/navbar.html" %}
+
+    <main id="main-content" class="flex-1 w-full animate-fade-in-slow">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "Build/includes/footer.html" %}
+
+    {% include "Build/includes/dark-mode.html" %}
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
