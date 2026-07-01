@@ -1,7 +1,7 @@
 # AI_BLOG_GEN
 
 Simple Django app to generate blog-style posts from YouTube transcripts.
-Instead of watching a long video just read the SUMMERY and save time.
+Instead of watching a long video just read the SUMMERY or Use it for Your Blog References.
 
 Quick start
 
